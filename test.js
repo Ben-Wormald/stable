@@ -1,5 +1,6 @@
 const { render } = require('./stable');
 
+const source = 'src';
 const entry = 'src/index.html';
 
 const data = {
@@ -11,8 +12,8 @@ const data = {
 };
 
 const run = async () => {
-  const result = await render(entry, data);
-  console.log(result.html());
+  const pages = await render(entry, data);
+  pages.forEach(page => console.log(page));
 };
 
 run();
