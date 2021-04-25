@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#1a1a1a" />
+    <title>Ben Wormald</title>
+  </head>
+  <body>
+    <stable-include html="header" />
+    <main>
+      <stable-routes>
+        <stable-route path="/" html="home" />
+        <stable-map data="posts">
+          <stable-route path="/post/{id}" html="post" />
+        </stable-map>
+        <stable-route html="scrobbler" />
+      </stable-routes>
+    </main>
+  </body>
+</html>
