@@ -1,7 +1,8 @@
 const { hydrate } = require('./src/stable');
 
 const options = {
-  sourceDir: 'test',
+  source: 'test',
+  output: 'dist',
   entry: 'index.html',
 };
 
@@ -20,7 +21,10 @@ const data = {
 
 const run = async () => {
   const pages = await hydrate(options, data);
-  pages.forEach(page => console.log(page.html));
+  pages.forEach((page) => {
+    console.log(page.route);
+    console.log(page.html);
+  });
 };
 
 run();

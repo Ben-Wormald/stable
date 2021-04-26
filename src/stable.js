@@ -12,10 +12,11 @@ const cheerioOptions = {
 let sourceDir = '';
 
 const handleMap = async (pages, tag, data) => {
-  return flatMap(pages, async ({ html }) => {
+  return flatMap(pages, async (page) => {
+    const { html } = page;
+
     const node = html(tag).first();
     const children = node.children();
-
     const dataPath = node[0].attribs.data;
     const items = get(data, dataPath, []);
   
@@ -27,21 +28,26 @@ const handleMap = async (pages, tag, data) => {
     node.remove();
   
     return [{
+      ...page,
       html,
     }];
   })
 };
 
 const handleInclude = async (pages, tag) => {
-  return flatMap(pages, async ({ html }) => {
+  return flatMap(pages, async (page) => {
+    const { html } = page;
+
     const node = html(tag).first();
     const file = node[0].attribs.html;
-
     const includes = await hydrate(`${file}.html`);
+
     return map(includes, async ({ html: include }) => {
       const node = html(tag).first();
       node.replaceWith(include);
+
       return {
+        ...page,
         html,
       };
     });
@@ -49,11 +55,12 @@ const handleInclude = async (pages, tag) => {
 };
 
 const handleRoutes = async (pages, tag) => {
-  return flatMap(pages, async ({ html }) => {
+  return flatMap(pages, async (page) => {
+    const { html } = page;
+
     const node = html(tag).first();
     const children = node.children();
     const routes = [];
-
     for (let i = 0; i < children.length; i++) {
       routes.push(children[i]);
     }
@@ -61,9 +68,10 @@ const handleRoutes = async (pages, tag) => {
     return map(routes, (route) => {
       const newHtml = cheerio.load(html.html(), cheerioOptions);
       const node = newHtml(tag).first();
+      const routePath = route.attribs.path || route.attribs.html;
       node.replaceWith(route);
       return {
-        route: '',
+        route: routePath,
         html: newHtml,
       };
     });
@@ -99,6 +107,7 @@ const hydrate = async (fileName, data) => {
   const html = cheerio.load(file, cheerioOptions);
 
   let pages = [{
+    route: fileName.replace('.html', ''),
     html,
   }];
 
@@ -110,15 +119,16 @@ const hydrate = async (fileName, data) => {
     }
   }
 
-  return pages.map(page => ({
+  return pages.map((page) => ({
     ...page,
     html: page.html.html(),
   }));
 };
 
 const init = (options, data) => {
-  sourceDir = options.sourceDir;
-  return hydrate(options.entry, data);
+  const { source, entry } = options;
+  sourceDir = source;
+  return hydrate(entry, data);
 };
 
 module.exports = {
