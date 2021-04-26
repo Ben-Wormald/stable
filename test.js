@@ -1,19 +1,26 @@
-const { render } = require('./stable');
+const { hydrate } = require('./src/stable');
 
-const source = 'src';
-const entry = 'src/index.html';
+const options = {
+  sourceDir: 'test',
+  entry: 'index.html',
+};
 
 const data = {
   posts: [
     {
+      id: 1,
       title: 'hello',
+    },
+    {
+      id: 2,
+      title: 'hi',
     },
   ],
 };
 
 const run = async () => {
-  const pages = await render(entry, data);
-  pages.forEach(page => console.log(page));
+  const pages = await hydrate(options, data);
+  pages.forEach(page => console.log(page.html));
 };
 
 run();

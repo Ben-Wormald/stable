@@ -1,15 +1,18 @@
 const cheerio = require('cheerio');
 const fs = require('fs').promises;
+const path = require('path');
 const { get, map, flatMap } = require('./util');
 
 // TODO cache files?
 
-const options = {
+const cheerioOptions = {
   xmlMode: true,
 };
 
+let sourceDir = '';
+
 const handleMap = async (pages, tag, data) => {
-  return map(pages, async ({ html }) => {
+  return flatMap(pages, async ({ html }) => {
     const node = html(tag).first();
     const children = node.children();
 
@@ -23,9 +26,9 @@ const handleMap = async (pages, tag, data) => {
     }
     node.remove();
   
-    return {
+    return [{
       html,
-    };
+    }];
   })
 };
 
@@ -34,10 +37,8 @@ const handleInclude = async (pages, tag) => {
     const node = html(tag).first();
     const file = node[0].attribs.html;
 
-    const newPages = await render(`src/${file}.html`);
-    return map(newPages, async ({ html: include }) => {
-      // const newHtml = html.root().clone();
-      // console.log(newHtml);
+    const includes = await hydrate(`${file}.html`);
+    return map(includes, async ({ html: include }) => {
       const node = html(tag).first();
       node.replaceWith(include);
       return {
@@ -51,16 +52,21 @@ const handleRoutes = async (pages, tag) => {
   return flatMap(pages, async ({ html }) => {
     const node = html(tag).first();
     const children = node.children();
-    const pages = [];
+    const routes = [];
+
     for (let i = 0; i < children.length; i++) {
-      // const page = html.clone();
-      pages.push({
-        route: '',
-        // html: page,
-        html,
-      });
+      routes.push(children[i]);
     }
-    return pages;
+
+    return map(routes, (route) => {
+      const newHtml = cheerio.load(html.html(), cheerioOptions);
+      const node = newHtml(tag).first();
+      node.replaceWith(route);
+      return {
+        route: '',
+        html: newHtml,
+      };
+    });
   });
 };
 
@@ -87,9 +93,10 @@ const stableTags = [
   },
 ];
 
-const render = async (path, data) => {
-  const file = await fs.readFile(path);
-  const html = cheerio.load(file, options);
+const hydrate = async (fileName, data) => {
+  const filePath = path.resolve(sourceDir, fileName);
+  const file = await fs.readFile(filePath);
+  const html = cheerio.load(file, cheerioOptions);
 
   let pages = [{
     html,
@@ -103,18 +110,17 @@ const render = async (path, data) => {
     }
   }
 
-  console.log(pages);
-
-  const newPages = pages.map(page => ({
+  return pages.map(page => ({
     ...page,
-    html: page.html(),
+    html: page.html.html(),
   }));
+};
 
-  console.log(newPages);
-
-  return newPages;
+const init = (options, data) => {
+  sourceDir = options.sourceDir;
+  return hydrate(options.entry, data);
 };
 
 module.exports = {
-  render,
+  hydrate: init,
 };
