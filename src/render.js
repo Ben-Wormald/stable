@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
-const { get, map, flatMap } = require('./util');
+const { expand, get, map, flatMap } = require('./util');
 
 // TODO cache files?
 
@@ -11,10 +11,19 @@ const cheerioOptions = {
 
 let sourceDir = '';
 
-const handleTag = (handler, pages, tag, data) =>
-  flatMap(pages, (page) =>
-    handler(page, tag, data)
-  );
+const handleTag = (stableTag, pages, parentData) => {
+  const { tag, handler } = stableTag;
+  return flatMap(pages, (page) => {
+    const node = page.html(tag).first();
+    const dataPath = node[0].attribs['stable-data'];
+    const localData = dataPath ? get(parentData, dataPath) : {};
+    const data = {
+      ...parentData,
+      ...localData,
+    };
+    return handler(page, tag, data)
+  });
+};
 
 const handleMap = async (page, tag, data) => {
   const { html } = page;
@@ -26,7 +35,7 @@ const handleMap = async (page, tag, data) => {
 
   for (let i = 0; i < items.length; i++) {
     const child = children.clone();
-    child.attr('data', `${dataPath}.${i}`);
+    child.attr('stable-data', `${dataPath}.${i}`);
     node.after(child);
   }
   node.remove();
@@ -55,7 +64,7 @@ const handleInclude = async (page, tag) => {
   });
 };
 
-const handleRoutes = async (page, tag) => {
+const handleRoutes = async (page, tag, data) => {
   const { html } = page;
 
   const node = html(tag).first();
@@ -68,7 +77,13 @@ const handleRoutes = async (page, tag) => {
   return map(routes, (route) => {
     const newHtml = cheerio.load(html.html(), cheerioOptions);
     const node = newHtml(tag).first();
-    const routePath = route.attribs.path || route.attribs.html;
+
+    let routePath = route.attribs.path || route.attribs.html;
+    if (routePath === '/') routePath = 'index';
+
+    let routeData = route.attribs['stable-data'] ? get(data, route.attribs['stable-data']) : data;
+    routePath = expand(routePath, routeData);
+
     node.replaceWith(route);
     return {
       route: routePath,
@@ -80,25 +95,39 @@ const handleRoutes = async (page, tag) => {
 const stableTags = [
   // {
   //   tag: 'stable-define',
-  //   handle: handleDefine,
+  //   handler: handleDefine,
   // },
   // {
   //   tag: 'stable-if',
-  //   handle: handleIf,
+  //   handler: handleIf,
   // },
   {
     tag: 'stable-map',
-    handle: handleMap,
+    handler: handleMap,
   },
   {
     tag: 'stable-include',
-    handle: handleInclude,
+    handler: handleInclude,
   },
   {
     tag: 'stable-routes',
-    handle: handleRoutes,
+    handler: handleRoutes,
+  },
+  {
+    tag: 'stable-route',
+    handler: handleInclude,
   },
 ];
+
+const pageHasTag = (pages, stableTag) => {
+  const { tag } = stableTag;
+  return pages.reduce((hasTag, page) => {
+    if (!hasTag) {
+      hasTag = page.html(tag).length > 0;
+    }
+    return hasTag;
+  }, false);
+};
 
 const render = async (fileName, data) => {
   const filePath = path.join(sourceDir, fileName);
@@ -111,10 +140,8 @@ const render = async (fileName, data) => {
   }];
 
   for (const stableTag of stableTags) {
-    const { tag, handle } = stableTag;
-    const nodes = html(tag);
-    for (let i = 0; i < nodes.length; i++) {
-      pages = await handleTag(handle, pages, tag, data);
+    while (pageHasTag(pages, stableTag)) {
+      pages = await handleTag(stableTag, pages, data);
     }
   }
 
