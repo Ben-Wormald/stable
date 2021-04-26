@@ -20,11 +20,8 @@ const data = {
 };
 
 const run = async () => {
-  const pages = await hydrate(options, data);
-  pages.forEach((page) => {
-    console.log(page.route);
-    console.log(page.html);
-  });
+  await hydrate(options, data);
+  console.log('done');
 };
 
 run();
