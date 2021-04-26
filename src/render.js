@@ -11,70 +11,69 @@ const cheerioOptions = {
 
 let sourceDir = '';
 
-const handleMap = async (pages, tag, data) => {
-  return flatMap(pages, async (page) => {
-    const { html } = page;
+const handleTag = (handler, pages, tag, data) =>
+  flatMap(pages, (page) =>
+    handler(page, tag, data)
+  );
 
-    const node = html(tag).first();
-    const children = node.children();
-    const dataPath = node[0].attribs.data;
-    const items = get(data, dataPath, []);
-  
-    for (let i = 0; i < items.length; i++) {
-      const child = children.clone();
-      child.attr('data', `${dataPath}.${i}`);
-      node.after(child);
-    }
-    node.remove();
-  
-    return [{
-      ...page,
-      html,
-    }];
-  })
+const handleMap = async (page, tag, data) => {
+  const { html } = page;
+
+  const node = html(tag).first();
+  const children = node.children();
+  const dataPath = node[0].attribs.data;
+  const items = get(data, dataPath, []);
+
+  for (let i = 0; i < items.length; i++) {
+    const child = children.clone();
+    child.attr('data', `${dataPath}.${i}`);
+    node.after(child);
+  }
+  node.remove();
+
+  return [{
+    ...page,
+    html,
+  }];
 };
 
-const handleInclude = async (pages, tag) => {
-  return flatMap(pages, async (page) => {
-    const { html } = page;
+const handleInclude = async (page, tag) => {
+  const { html } = page;
 
+  const node = html(tag).first();
+  const file = node[0].attribs.html;
+  const includes = await render(`${file}.html`);
+
+  return map(includes, async ({ html: include }) => {
     const node = html(tag).first();
-    const file = node[0].attribs.html;
-    const includes = await render(`${file}.html`);
+    node.replaceWith(include);
 
-    return map(includes, async ({ html: include }) => {
-      const node = html(tag).first();
-      node.replaceWith(include);
-
-      return {
-        ...page,
-        html,
-      };
-    });
+    return {
+      ...page,
+      html,
+    };
   });
 };
 
-const handleRoutes = async (pages, tag) => {
-  return flatMap(pages, async (page) => {
-    const { html } = page;
+const handleRoutes = async (page, tag) => {
+  const { html } = page;
 
-    const node = html(tag).first();
-    const children = node.children();
-    const routes = [];
-    for (let i = 0; i < children.length; i++) {
-      routes.push(children[i]);
-    }
+  const node = html(tag).first();
+  const children = node.children();
+  const routes = [];
+  for (let i = 0; i < children.length; i++) {
+    routes.push(children[i]);
+  }
 
-    return map(routes, (route) => {
-      const newHtml = cheerio.load(html.html(), cheerioOptions);
-      const node = newHtml(tag).first();
-      const routePath = route.attribs.path || route.attribs.html;
-      node.replaceWith(route);
-      return {
-        route: routePath,
-        html: newHtml,
-      };
-    });
+  return map(routes, (route) => {
+    const newHtml = cheerio.load(html.html(), cheerioOptions);
+    const node = newHtml(tag).first();
+    const routePath = route.attribs.path || route.attribs.html;
+    node.replaceWith(route);
+    return {
+      route: routePath,
+      html: newHtml,
+    };
   });
 };
 
@@ -115,7 +114,7 @@ const render = async (fileName, data) => {
     const { tag, handle } = stableTag;
     const nodes = html(tag);
     for (let i = 0; i < nodes.length; i++) {
-      pages = await handle(pages, tag, data);
+      pages = await handleTag(handle, pages, tag, data);
     }
   }
 
