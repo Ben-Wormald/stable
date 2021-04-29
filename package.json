@@ -2,12 +2,12 @@
   "name": "stable",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "author": "Ben Wormald <benwormald95@gmail.com>",
+  "license": "ISC",
+  "main": "src/stable.js",
   "scripts": {
     "test": "node test.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.6",
     "pretty": "^2.0.0"
