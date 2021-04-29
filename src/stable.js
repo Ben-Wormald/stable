@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
-const prettify = require('html-prettify');
+const pretty = require('pretty');
 const { renderRoot } = require('./render');
 const { map } = require('./util');
 
@@ -20,7 +20,7 @@ const hydrate = async (userOptions = {}, data = {}) => {
   const pages = await renderRoot(options, data);
   const prettifiedPages = pages.map(page => ({
     ...page,
-    html: prettify(page.html),
+    html: pretty(page.html),
   }));
   return write(prettifiedPages, options);
 };
