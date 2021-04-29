@@ -1,18 +1,16 @@
 const cheerio = require('cheerio');
-const fs = require('fs').promises;
-const path = require('path');
 const { hydrate, get, map, flatMap } = require('./util');
+const { init, save, load } = require('./store');
 
 const cheerioOptions = {
   xmlMode: true,
 };
 
-let sourceDir = '';
-
 const handleTag = (stableTag, pages, parentData) => {
   const { tag, handler } = stableTag;
   return flatMap(pages, (page) => {
     const node = page.html(tag).first();
+
     const dataPath = node[0].attribs['stable-data'];
     const localData = dataPath ? get(parentData, dataPath) : {};
     const data = {
@@ -23,10 +21,26 @@ const handleTag = (stableTag, pages, parentData) => {
   });
 };
 
+const handleDefine = async (page, tag, data) => {
+  const { html } = page;
+  const node = html(tag).first();
+
+  const id = node[0].attribs.html;
+  const htmlString = node.html();
+  save(id, htmlString);
+  
+  node.remove();
+
+  return [{
+    ...page,
+    html,
+  }];
+};
+
 const handleMap = async (page, tag, data) => {
   const { html } = page;
-
   const node = html(tag).first();
+
   const children = node.children();
   const dataPath = node[0].attribs.data;
   const items = get(data, dataPath, []);
@@ -46,10 +60,10 @@ const handleMap = async (page, tag, data) => {
 
 const handleInclude = async (page, tag, data) => {
   const { html } = page;
-
   const node = html(tag).first();
-  const file = node[0].attribs.html;
-  const includes = await render(`${file}.html`, data);
+
+  const id = node[0].attribs.html;
+  const includes = await render(id, data);
 
   return map(includes, async ({ html: include }) => {
     const node = html(tag).first();
@@ -64,8 +78,8 @@ const handleInclude = async (page, tag, data) => {
 
 const handleRoutes = async (page, tag, data) => {
   const { html } = page;
-
   const node = html(tag).first();
+
   const children = node.children();
   const routes = [];
   for (let i = 0; i < children.length; i++) {
@@ -91,10 +105,10 @@ const handleRoutes = async (page, tag, data) => {
 };
 
 const stableTags = [
-  // {
-  //   tag: 'stable-define',
-  //   handler: handleDefine,
-  // },
+  {
+    tag: 'stable-define',
+    handler: handleDefine,
+  },
   // {
   //   tag: 'stable-if',
   //   handler: handleIf,
@@ -127,13 +141,12 @@ const pageHasTag = (pages, stableTag) => {
   }, false);
 };
 
-const render = async (fileName, data) => {
-  const filePath = path.join(sourceDir, fileName);
-  const file = await fs.readFile(filePath);
-  const html = cheerio.load(file, cheerioOptions);
+const render = async (id, data) => {
+  const htmlString = await load(id);
+  const html = cheerio.load(htmlString, cheerioOptions);
 
   let pages = [{
-    route: fileName.replace('.html', ''),
+    route: id,
     html,
   }];
 
@@ -149,12 +162,13 @@ const render = async (fileName, data) => {
   }));
 };
 
-const init = (options, data) => {
+const renderRoot = (options, data) => {
   const { source, entry } = options;
-  sourceDir = source;
-  return render(entry, data);
+  init(source);
+  const entryId = entry.replace('.html', '');
+  return render(entryId, data);
 };
 
 module.exports = {
-  init,
+  renderRoot,
 };

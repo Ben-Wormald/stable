@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
-const { init } = require('./render');
+const prettify = require('html-prettify');
+const { renderRoot } = require('./render');
 const { map } = require('./util');
 
 const defaultOptions = {
@@ -16,8 +17,12 @@ const hydrate = async (userOptions = {}, data = {}) => {
     ...userOptions,
   };
 
-  const pages = await init(options, data);
-  return write(pages, options);
+  const pages = await renderRoot(options, data);
+  const prettifiedPages = pages.map(page => ({
+    ...page,
+    html: prettify(page.html),
+  }));
+  return write(prettifiedPages, options);
 };
 
 const write = (pages, options) => {
