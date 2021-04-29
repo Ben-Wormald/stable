@@ -11,6 +11,7 @@ const data = {
     {
       id: 1,
       title: 'hello',
+      hasImage: true,
     },
     {
       id: 2,

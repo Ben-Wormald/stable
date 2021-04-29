@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const { hydrate, get, map, flatMap } = require('./util');
+const { hydrate, evaluate, get, map, flatMap } = require('./util');
 const { init, save, load } = require('./store');
 
 const cheerioOptions = {
@@ -30,6 +30,26 @@ const handleDefine = async (page, tag, data) => {
   save(id, htmlString);
   
   node.remove();
+
+  return [{
+    ...page,
+    html,
+  }];
+};
+
+const handleIf = async (page, tag, data) => {
+  const { html } = page;
+  const node = html(tag).first();
+
+  const condition = node[0].attribs.condition;
+  const isTrue = evaluate(condition, data);
+  
+  if (isTrue) {
+    const content = node.clone().html();
+    node.replaceWith(content);
+  } else {
+    node.remove();
+  }
 
   return [{
     ...page,
@@ -109,10 +129,10 @@ const stableTags = [
     tag: 'stable-define',
     handler: handleDefine,
   },
-  // {
-  //   tag: 'stable-if',
-  //   handler: handleIf,
-  // },
+  {
+    tag: 'stable-if',
+    handler: handleIf,
+  },
   {
     tag: 'stable-map',
     handler: handleMap,

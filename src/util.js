@@ -10,6 +10,10 @@ const hydrate = (string, data) => {
   }, string);
 };
 
+const evaluate = (expression, data) => {
+  return true;
+};
+
 const get = (obj, path, defValue) => {
   const pathArray = Array.isArray(path) ? path : path.match(/([^[.\]])+/g);
   return (
@@ -25,6 +29,7 @@ const flatMap = async (array, f) => Promise.all(flatten(await map(array, f)));
 
 module.exports = {
   hydrate,
+  evaluate,
   get,
   map,
   flatMap,
