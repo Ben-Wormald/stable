@@ -1,9 +1,7 @@
 const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
-const { expand, get, map, flatMap } = require('./util');
-
-// TODO cache files?
+const { hydrate, get, map, flatMap } = require('./util');
 
 const cheerioOptions = {
   xmlMode: true,
@@ -46,12 +44,12 @@ const handleMap = async (page, tag, data) => {
   }];
 };
 
-const handleInclude = async (page, tag) => {
+const handleInclude = async (page, tag, data) => {
   const { html } = page;
 
   const node = html(tag).first();
   const file = node[0].attribs.html;
-  const includes = await render(`${file}.html`);
+  const includes = await render(`${file}.html`, data);
 
   return map(includes, async ({ html: include }) => {
     const node = html(tag).first();
@@ -82,7 +80,7 @@ const handleRoutes = async (page, tag, data) => {
     if (routePath === '/') routePath = 'index';
 
     let routeData = route.attribs['stable-data'] ? get(data, route.attribs['stable-data']) : data;
-    routePath = expand(routePath, routeData);
+    routePath = hydrate(routePath, routeData);
 
     node.replaceWith(route);
     return {
@@ -147,7 +145,7 @@ const render = async (fileName, data) => {
 
   return pages.map((page) => ({
     ...page,
-    html: page.html.html(),
+    html: hydrate(page.html.html(), data),
   }));
 };
 

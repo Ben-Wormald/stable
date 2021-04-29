@@ -1,7 +1,7 @@
-const expansion = /\{[a-zA-Z0-9_.-]+\}/g;
+const placeholder = /\{[a-zA-Z0-9_.-]+\}/g;
 
-const expand = (string, data) => {
-  let matches = string.match(expansion) || [];
+const hydrate = (string, data) => {
+  let matches = string.match(placeholder) || [];
 
   return matches.reduce((output, match) => {
     const key = match.slice(1, -1);
@@ -24,7 +24,7 @@ const flatten = (arr) => [].concat(...arr);
 const flatMap = async (array, f) => Promise.all(flatten(await map(array, f)));
 
 module.exports = {
-  expand,
+  hydrate,
   get,
   map,
   flatMap,
