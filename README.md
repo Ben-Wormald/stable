@@ -1,6 +1,6 @@
 # Stable
 
 ## To do
-- shorthand tags
+- strip empty lines from output
 - local/global merge strategy
 - more complex logic - else, switch
