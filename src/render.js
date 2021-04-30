@@ -127,26 +127,32 @@ const handleRoutes = async (page, tag, data) => {
 const stableTags = [
   {
     tag: 'stable-define',
+    shorthand: '=',
     handler: handleDefine,
   },
   {
     tag: 'stable-if',
+    shorthand: '?',
     handler: handleIf,
   },
   {
     tag: 'stable-map',
+    shorthand: '#',
     handler: handleMap,
   },
   {
     tag: 'stable-include',
+    shorthand: '@',
     handler: handleInclude,
   },
   {
     tag: 'stable-routes',
+    shorthand: '*',
     handler: handleRoutes,
   },
   {
     tag: 'stable-route',
+    shorthand: '+',
     handler: handleInclude,
   },
 ];
