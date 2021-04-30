@@ -9,6 +9,7 @@ const defaultOptions = {
   entry: 'index.html',
   output: 'dist',
   extension: true,
+  expand: false,
 };
 
 const hydrate = async (userOptions = {}, data = {}) => {

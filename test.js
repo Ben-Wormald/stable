@@ -1,7 +1,7 @@
 const { hydrate } = require('./src/stable');
 
 const options = {
-  source: 'test',
+  source: 'test-short',
   output: 'dist',
   entry: 'index.html',
 };

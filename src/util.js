@@ -1,4 +1,43 @@
+const shorthands = [
+  {
+    tag: 'stable-define',
+    symbol: '=',
+  },
+  {
+    tag: 'stable-if',
+    symbol: '?',
+  },
+  {
+    tag: 'stable-map',
+    symbol: '#',
+  },
+  {
+    tag: 'stable-include',
+    symbol: '@',
+  },
+  {
+    tag: 'stable-routes',
+    symbol: '*',
+  },
+  {
+    tag: 'stable-route',
+    symbol: '+',
+  },
+];
+
 const placeholder = /\{[a-zA-Z0-9_.-]+\}/g;
+
+const expand = (string) => {
+  console.log('expand', string);
+  const result = shorthands.reduce(
+    (input, { tag, symbol}) => input
+      .split(`<${symbol}`).join(`<${tag}`)
+      .split(`</${symbol}`).join(`</${tag}`),
+    string,
+  );
+  console.log(result);
+  return result;
+};
 
 const hydrate = (string, data) => {
   let matches = string.match(placeholder) || [];
@@ -14,7 +53,7 @@ const evaluate = (expression, data) => {
   const entries = Object.entries(data);
   const keys = entries.map(entry => entry[0]);
   const values = entries.map(entry => entry[1]);
-  
+
   const statement = `return ${expression};`;
   const f = new Function(...keys, statement);
 
@@ -40,6 +79,7 @@ const flatten = (arr) => [].concat(...arr);
 const flatMap = async (array, f) => Promise.all(flatten(await map(array, f)));
 
 module.exports = {
+  expand,
   hydrate,
   evaluate,
   get,
