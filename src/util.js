@@ -11,7 +11,19 @@ const hydrate = (string, data) => {
 };
 
 const evaluate = (expression, data) => {
-  return true;
+  const entries = Object.entries(data);
+  const keys = entries.map(entry => entry[0]);
+  const values = entries.map(entry => entry[1]);
+  
+  const statement = `return ${expression};`;
+  const f = new Function(...keys, statement);
+
+  try {
+    const result = f(...values);
+    return result;
+  } catch (e) {
+    return null;
+  }
 };
 
 const get = (obj, path, defValue) => {
