@@ -28,15 +28,12 @@ const shorthands = [
 const placeholder = /\{[a-zA-Z0-9_.-]+\}/g;
 
 const expand = (string) => {
-  console.log('expand', string);
-  const result = shorthands.reduce(
+  return shorthands.reduce(
     (input, { tag, symbol}) => input
       .split(`<${symbol}`).join(`<${tag}`)
       .split(`</${symbol}`).join(`</${tag}`),
     string,
   );
-  console.log(result);
-  return result;
 };
 
 const hydrate = (string, data) => {

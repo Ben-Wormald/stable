@@ -1,7 +1,7 @@
 {
-  "name": "stable",
+  "name": "stable-js",
   "version": "0.1.0",
-  "description": "",
+  "description": "Dynamically generate a static site",
   "author": "Ben Wormald <benwormald95@gmail.com>",
   "license": "ISC",
   "main": "src/stable.js",

@@ -19,12 +19,14 @@ const hydrate = async (userOptions = {}, data = {}) => {
   };
 
   const pages = await renderRoot(options, data);
-  const prettifiedPages = pages.map(page => ({
+  const formattedPages = pages.map(page => ({
     ...page,
-    html: pretty(page.html),
+    html: stripBlankLines(pretty(page.html)),
   }));
-  return write(prettifiedPages, options);
+  return write(formattedPages, options);
 };
+
+const stripBlankLines = html => `${html.split('\n').filter(line => line.length).join('\n')}\n`;
 
 const write = (pages, options) => {
   const { output, extension } = options;
