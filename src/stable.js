@@ -8,8 +8,8 @@ const defaultOptions = {
   source: 'src',
   entry: 'index.html',
   output: 'dist',
-  extension: true,
-  expand: false,
+  stripExtension: false,
+  enableShorthand: false,
 };
 
 const hydrate = async (userOptions = {}, data = {}) => {
@@ -29,10 +29,10 @@ const hydrate = async (userOptions = {}, data = {}) => {
 const stripBlankLines = html => `${html.split('\n').filter(line => line.length).join('\n')}\n`;
 
 const write = (pages, options) => {
-  const { output, extension } = options;
+  const { output, stripExtension } = options;
   return map(pages, async (page) => {
     const { route, html } = page;
-    const fileName = extension ? `${route}.html` : route;
+    const fileName = stripExtension ? route : `${route}.html`;
     const filePath = path.join(process.cwd(), output, fileName);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     return fs.writeFile(filePath, html);

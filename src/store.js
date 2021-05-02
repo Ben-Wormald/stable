@@ -6,9 +6,9 @@ let sourceDir = '.';
 let shouldExpand = false;
 const store = [];
 
-const init = ({ source, expand }) => {
+const init = ({ source, enableShorthand }) => {
   sourceDir = source;
-  shouldExpand = expand;
+  shouldExpand = enableShorthand;
 };
 
 const save = (id, html) => {

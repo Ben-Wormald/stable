@@ -25,7 +25,7 @@ const shorthands = [
   },
 ];
 
-const placeholder = /\{[a-zA-Z0-9_.-]+\}/g;
+const placeholder = /\{\{[a-zA-Z0-9_.-]+\}\}/g;
 
 const expand = (string) => {
   return shorthands.reduce(
@@ -40,7 +40,7 @@ const hydrate = (string, data) => {
   let matches = string.match(placeholder) || [];
 
   return matches.reduce((output, match) => {
-    const key = match.slice(1, -1);
+    const key = match.slice(2, -2);
     const value = get(data, key);
     return output.split(match).join(value);
   }, string);

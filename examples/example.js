@@ -4,8 +4,8 @@ const options = {
   source: 'example-src',
   entry: 'index.html', // default
   output: 'example-dist',
-  extension: true, // default
-  expand: false, // default
+  stripExtension: false, // default
+  enableShorthand: false, // default
 };
 
 const data = {
