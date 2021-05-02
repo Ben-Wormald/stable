@@ -1,0 +1,16 @@
+<stable-define html="post-summary">
+  <div>
+    <h2>
+      <a href="./post/{id}.html">{title}</a>
+    </h2>
+    <p>{date}</p>
+  </div>
+</stable-define>
+
+<div>
+  <h2>Welcome to my site!</h2>
+  <stable-map data="posts">
+    <stable-include html="post-summary" />
+  </stable-map>
+  <a href='./about.html'>About</a>
+</div>

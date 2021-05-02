@@ -42,7 +42,7 @@ const handleIf = async (page, tag, data) => {
   const node = html(tag).first();
 
   const condition = node[0].attribs.condition;
-  const isTrue = evaluate(condition, data);
+  const isTrue = !!evaluate(condition, data);
   
   if (isTrue) {
     const content = node.clone().html();

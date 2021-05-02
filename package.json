@@ -2,12 +2,15 @@
   "name": "stable-js",
   "version": "0.1.0",
   "description": "Dynamically generate a static site",
+  "keywords": [
+    "html",
+    "framework",
+    "generator"
+  ],
   "author": "Ben Wormald <benwormald95@gmail.com>",
+  "repository": "github:Ben-Wormald/stable",
   "license": "ISC",
   "main": "src/stable.js",
-  "scripts": {
-    "test": "node test.js"
-  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.6",
     "pretty": "^2.0.0"
