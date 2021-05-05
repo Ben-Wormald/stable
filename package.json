@@ -11,8 +11,14 @@
   "repository": "github:Ben-Wormald/stable",
   "license": "ISC",
   "main": "src/stable.js",
+  "scripts": {
+    "test": "tap"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.6",
     "pretty": "^2.0.0"
+  },
+  "devDependencies": {
+    "tap": "^15.0.6"
   }
 }

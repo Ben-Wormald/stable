@@ -12,7 +12,7 @@ const handleTag = (stableTag, pages, parentData) => {
   return flatMap(pages, (page) => {
     const node = page.html(tag).first();
 
-    const dataPath = node[0].attribs['stable-data'];
+    const dataPath = node[0].attribs.data;
     const localData = dataPath ? get(parentData, dataPath) : {};
     const data = {
       ...parentData,
@@ -68,7 +68,8 @@ const handleMap = async (page, tag, data) => {
 
   for (let i = 0; i < items.length; i++) {
     const child = children.clone();
-    child.attr('stable-data', `${dataPath}.${i}`);
+    const childDataPath = child[0].attribs.data;
+    if (!childDataPath) child.attr('data', `${dataPath}.${i}`);
     node.after(child);
   }
   node.remove();
