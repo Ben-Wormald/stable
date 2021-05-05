@@ -29,7 +29,6 @@ const data = {
 
 const run = async () => {
   await hydrate(options, data);
-  console.log('Generated example site!');
 };
 
 run();

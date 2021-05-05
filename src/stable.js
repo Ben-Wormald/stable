@@ -23,7 +23,11 @@ const hydrate = async (userOptions = {}, data = {}) => {
     ...page,
     html: pretty(page.html, { ocd: true }),
   }));
-  return write(formattedPages, options);
+
+  await write(formattedPages, options);
+  
+  const count = formattedPages.length;
+  console.log(`done! generated ${count} file${count === 1 ? '' : 's'}`);
 };
 
 const write = (pages, options) => {
