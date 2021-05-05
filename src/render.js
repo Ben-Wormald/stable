@@ -4,6 +4,7 @@ const { init, save, load } = require('./store');
 
 const cheerioOptions = {
   xmlMode: true,
+  decodeEntities: false,
 };
 
 const handleTag = (stableTag, pages, parentData) => {
