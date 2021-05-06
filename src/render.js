@@ -65,11 +65,15 @@ const handleMap = async (page, tag, data) => {
   const children = node.children();
   const dataPath = node[0].attribs.data;
   const items = get(data, dataPath, []);
+  items.reverse();
 
   for (let i = 0; i < items.length; i++) {
     const child = children.clone();
+
+    const isStableTag = stableTags.find(({ tag }) => tag === child[0].name);
     const childDataPath = child[0].attribs.data;
-    if (!childDataPath) child.attr('data', `${dataPath}.${i}`);
+    if (isStableTag && !childDataPath) child.attr('data', `${dataPath}.${i}`);
+
     node.after(child);
   }
   node.remove();
@@ -112,10 +116,10 @@ const handleRoutes = async (page, tag, data) => {
     const newHtml = cheerio.load(html.html(), cheerioOptions);
     const node = newHtml(tag).first();
 
-    let routePath = route.attribs.path || route.attribs.html;
-    if (routePath === '/') routePath = 'index';
+    let routePath = route.attribs.path || `/${route.attribs.html}`;
+    if (routePath === '/') routePath = '/index';
 
-    let routeData = route.attribs['stable-data'] ? get(data, route.attribs['stable-data']) : data;
+    let routeData = route.attribs['data'] ? get(data, route.attribs['data']) : data;
     routePath = hydrate(routePath, routeData);
 
     node.replaceWith(route);

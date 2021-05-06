@@ -30,14 +30,33 @@ const ifs = `
 </div>`;
 
 const map = `
+<stable-define html="test-component">
+  <p>{{testData}}</p>
+</stable-define>
+
 <div>
   <stable-map data="items">
-    <p>item</p>
+    <stable-include html="test-component" />
   </stable-map>
+</div>`;
+
+const routes = `
+<stable-define html="test-component">
+  <p>hi</p>
+</stable-define>
+
+<div>
+  <stable-routes>
+    <stable-route html="test-component" />
+    <stable-route path="/"  html="test-component" />
+    <stable-route path="/test" html="test-component" />
+    <stable-route path="/{{path}}" html="test-component" />
+  </stable-routes>
 </div>`;
 
 module.exports = {
   define,
   ifs,
   map,
+  routes,
 };
