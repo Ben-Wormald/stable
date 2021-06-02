@@ -175,7 +175,7 @@ t.test('includes an external file', async t => {
   t.end()
 });
 
-t.only('renders routes', async t => {
+t.test('renders routes', async t => {
   const { renderRoot } = t.mock('../src/render', {
     fs: { promises: {
       readFile: () => fixtures.routes,
