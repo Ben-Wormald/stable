@@ -40,6 +40,17 @@ const mapInclude = `
   </stable-map>
 </div>`;
 
+const mapIncludeData = `
+<stable-define html="test-component">
+  <p>{{testSubData}}</p>
+</stable-define>
+
+<div>
+  <stable-map items="items">
+    <stable-include html="test-component" data="testData" />
+  </stable-map>
+</div>`;
+
 const mapHtml = `
 <div>
   <stable-map items="items">
@@ -56,7 +67,7 @@ const mapHtmlAs = `
 
 const routes = `
 <stable-define html="test-component">
-  <p>hi</p>
+  <p>{{testData}}</p>
 </stable-define>
 
 <div>
@@ -65,6 +76,7 @@ const routes = `
     <stable-route path="/"  html="test-component" />
     <stable-route path="/test" html="test-component" />
     <stable-route path="/{{path}}" html="test-component" />
+    <stable-route path="/{{path}}" html="test-component" data="moreData" />
   </stable-routes>
 </div>`;
 
@@ -72,6 +84,7 @@ module.exports = {
   define,
   ifs,
   mapInclude,
+  mapIncludeData,
   mapHtml,
   mapHtmlAs,
   routes,

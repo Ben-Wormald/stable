@@ -97,7 +97,11 @@ const handleMap = async (page, tag, data) => {
       output = hydrate(child.toString(), mergedData);
     } else {
       const childDataPath = child[0] && child[0].attribs.data;
-      if (!childDataPath) child.attr('data', `${itemsPath}.${i}`);
+      if (!childDataPath) {
+        child.attr('data', `${itemsPath}.${i}`);
+      } else {
+        child.attr('data', `${itemsPath}.${i}.${childDataPath}`);
+      };
       output = child;
     }
 

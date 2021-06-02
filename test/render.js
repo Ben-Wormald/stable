@@ -85,6 +85,29 @@ t.test('maps stable elements with data', async t => {
   t.end()
 });
 
+t.test('maps stable elements with specified data', async t => {
+  const { renderRoot } = t.mock('../src/render', {
+    fs: { promises: {
+      readFile: () => fixtures.mapIncludeData,
+    } },
+  });
+
+  const data = {
+    items: [
+      { testData: { testSubData: 'one' } },
+      { testData: { testSubData: 'two' } },
+      { testData: { testSubData: 'three' } },
+    ],
+  };
+
+  const actual = await renderRoot(defaultOptions, data);
+
+  t.equal(actual.length, 1);
+  t.equal(actual[0].route, 'index');
+  t.equal(actual[0].html.replace(/\s+/g, ''), '<div><p>one</p><p>two</p><p>three</p></div>');
+  t.end()
+});
+
 t.test('maps HTML elements with data', async t => {
   const { renderRoot } = t.mock('../src/render', {
     fs: { promises: {
@@ -152,7 +175,7 @@ t.test('includes an external file', async t => {
   t.end()
 });
 
-t.test('renders routes', async t => {
+t.only('renders routes', async t => {
   const { renderRoot } = t.mock('../src/render', {
     fs: { promises: {
       readFile: () => fixtures.routes,
@@ -161,16 +184,23 @@ t.test('renders routes', async t => {
 
   const actual = await renderRoot(defaultOptions, {
     path: 'data-path',
+    testData: 'hi',
+    moreData: {
+      path: 'sub-data-path',
+      testData: 'hello',
+    },
   });
 
-  t.equal(actual.length, 4);
+  t.equal(actual.length, 5);
   t.equal(actual[0].route, '/test-component');
   t.equal(actual[1].route, '/index');
   t.equal(actual[2].route, '/test');
   t.equal(actual[3].route, '/data-path');
+  t.equal(actual[4].route, '/sub-data-path');
   t.equal(actual[0].html.replace(/\s+/g, ''), '<div><p>hi</p></div>');
   t.equal(actual[1].html.replace(/\s+/g, ''), '<div><p>hi</p></div>');
   t.equal(actual[2].html.replace(/\s+/g, ''), '<div><p>hi</p></div>');
   t.equal(actual[3].html.replace(/\s+/g, ''), '<div><p>hi</p></div>');
+  t.equal(actual[4].html.replace(/\s+/g, ''), '<div><p>hello</p></div>');
   t.end()
 });
