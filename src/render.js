@@ -18,6 +18,11 @@ const handleTag = (stableTag, pages, parentData) => {
       ...parentData,
       ...localData,
     };
+
+    Object.entries(node[0].attribs).forEach(
+      ([key, value]) => node.attr(key, hydrate(value, data))
+    );
+
     return handler(page, tag, data)
   });
 };
@@ -63,18 +68,40 @@ const handleMap = async (page, tag, data) => {
   const node = html(tag).first();
 
   const children = node.children();
-  const dataPath = node[0].attribs.data;
-  const items = get(data, dataPath, []);
+  const itemsPath = node[0].attribs.items;
+  const itemsAs = node[0].attribs.as;
+  const items = get(data, itemsPath, []);
   items.reverse();
 
   for (let i = 0; i < items.length; i++) {
     const child = children.clone();
+    const childData = data[itemsPath][i];
 
-    const isStableTag = stableTags.find(({ tag }) => tag === child[0].name);
-    const childDataPath = child[0].attribs.data;
-    if (isStableTag && !childDataPath) child.attr('data', `${dataPath}.${i}`);
+    let mergedData;
+    if (itemsAs) {
+      mergedData = {
+        ...data,
+        [itemsAs]: childData,
+      };
+    } else {
+      mergedData = {
+        ...data,
+        ...childData,
+      };
+    }
 
-    node.after(child);
+    const isStableTag = stableTags.find(({ tag }) => child[0] && tag === child[0].name);
+
+    let output;
+    if (!isStableTag) {
+      output = hydrate(child.toString(), mergedData);
+    } else {
+      const childDataPath = child[0] && child[0].attribs.data;
+      if (!childDataPath) child.attr('data', `${itemsPath}.${i}`);
+      output = child;
+    }
+
+    node.after(output);
   }
   node.remove();
 
@@ -119,7 +146,7 @@ const handleRoutes = async (page, tag, data) => {
     let routePath = route.attribs.path || `/${route.attribs.html}`;
     if (routePath === '/') routePath = '/index';
 
-    let routeData = route.attribs['data'] ? get(data, route.attribs['data']) : data;
+    let routeData = route.attribs.data ? get(data, route.attribs.data) : data;
     routePath = hydrate(routePath, routeData);
 
     node.replaceWith(route);

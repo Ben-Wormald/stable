@@ -29,14 +29,28 @@ const ifs = `
   </stable-if>
 </div>`;
 
-const map = `
+const mapInclude = `
 <stable-define html="test-component">
   <p>{{testData}}</p>
 </stable-define>
 
 <div>
-  <stable-map data="items">
+  <stable-map items="items">
     <stable-include html="test-component" />
+  </stable-map>
+</div>`;
+
+const mapHtml = `
+<div>
+  <stable-map items="items">
+    <span>{{testData}}</span>
+  </stable-map>
+</div>`;
+
+const mapHtmlAs = `
+<div>
+  <stable-map items="items" as="testData">
+    <span>{{testData}}</span>
   </stable-map>
 </div>`;
 
@@ -57,6 +71,8 @@ const routes = `
 module.exports = {
   define,
   ifs,
-  map,
+  mapInclude,
+  mapHtml,
+  mapHtmlAs,
   routes,
 };

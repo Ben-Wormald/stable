@@ -62,10 +62,10 @@ t.test('evaluates if blocks', async t => {
   t.end()
 });
 
-t.test('maps items with data', async t => {
+t.test('maps stable elements with data', async t => {
   const { renderRoot } = t.mock('../src/render', {
     fs: { promises: {
-      readFile: () => fixtures.map,
+      readFile: () => fixtures.mapInclude,
     } },
   });
 
@@ -82,6 +82,52 @@ t.test('maps items with data', async t => {
   t.equal(actual.length, 1);
   t.equal(actual[0].route, 'index');
   t.equal(actual[0].html.replace(/\s+/g, ''), '<div><p>one</p><p>two</p><p>three</p></div>');
+  t.end()
+});
+
+t.test('maps HTML elements with data', async t => {
+  const { renderRoot } = t.mock('../src/render', {
+    fs: { promises: {
+      readFile: () => fixtures.mapHtml,
+    } },
+  });
+
+  const data = {
+    items: [
+      { testData: 'one' },
+      { testData: 'two' },
+      { testData: 'three' },
+    ],
+  };
+
+  const actual = await renderRoot(defaultOptions, data);
+
+  t.equal(actual.length, 1);
+  t.equal(actual[0].route, 'index');
+  t.equal(actual[0].html.replace(/\s+/g, ''), '<div><span>one</span><span>two</span><span>three</span></div>');
+  t.end()
+});
+
+t.test('maps HTML elements as value', async t => {
+  const { renderRoot } = t.mock('../src/render', {
+    fs: { promises: {
+      readFile: () => fixtures.mapHtmlAs,
+    } },
+  });
+
+  const data = {
+    items: [
+      'one',
+      'two',
+      'three',
+    ],
+  };
+
+  const actual = await renderRoot(defaultOptions, data);
+
+  t.equal(actual.length, 1);
+  t.equal(actual[0].route, 'index');
+  t.equal(actual[0].html.replace(/\s+/g, ''), '<div><span>one</span><span>two</span><span>three</span></div>');
   t.end()
 });
 
