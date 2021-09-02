@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const pretty = require('pretty');
-const { renderRoot } = require('./render');
+const { renderRoot } = require('./render2');
 const { map } = require('./util');
 
 const defaultOptions = {

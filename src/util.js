@@ -1,3 +1,18 @@
+const { xml2json, json2xml } = require('xml-js');
+
+// const xmlParser = xml2js.Parser({
+//   preserveChildrenOrder: true,
+//   explicitChildren: true,
+//   attrkey: 'stable-attr',
+//   charkey: 'stable-char',
+//   childkey: 'stable-child',
+//   // explicitRoot: false,
+// });
+
+// const xmlBuilder = new xml2js.Builder({
+//   // rootName: 'stable-root',
+// });
+
 const shorthands = [
   {
     tag: 'stable-define',
@@ -78,6 +93,21 @@ const flatten = (arr) => [].concat(...arr);
 
 const flatMap = async (array, f) => Promise.all(flatten(await map(array, f)));
 
+const parse = async (htmlString) => {
+  const xmlString = `<stable-root>${htmlString}</stable-root>`;
+  const jsonString = xml2json(xmlString);
+  const root = JSON.parse(jsonString);
+  const elements = root.elements[0].elements;
+  // console.log(JSON.stringify(elements, null, 2));
+  // console.log(parsed);
+
+  const built = json2xml(JSON.stringify(root));
+  console.log(built);
+
+  // const xml = xmlBuilder.buildObject(parsed);
+  // return xml;
+};
+
 module.exports = {
   expand,
   hydrate,
@@ -85,4 +115,5 @@ module.exports = {
   get,
   map,
   flatMap,
+  parse,
 };

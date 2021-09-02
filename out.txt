@@ -1,0 +1,1660 @@
+{
+  "stable-root": {
+    "#name": "stable-root",
+    "stable-child": [
+      {
+        "stable-char": "hello2",
+        "#name": "test"
+      },
+      {
+        "stable-attr": {
+          "lang": "en"
+        },
+        "#name": "html",
+        "stable-child": [
+          {
+            "#name": "head",
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-char": "Test",
+                "#name": "title"
+              }
+            ],
+            "meta": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                }
+              }
+            ],
+            "title": [
+              "Test"
+            ]
+          },
+          {
+            "#name": "body",
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "#name": "main",
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "stable-include": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                }
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                }
+              }
+            ],
+            "main": [
+              {
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "head": [
+          {
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-char": "Test",
+                "#name": "title"
+              }
+            ],
+            "meta": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                }
+              }
+            ],
+            "title": [
+              "Test"
+            ]
+          }
+        ],
+        "body": [
+          {
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "#name": "main",
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "stable-include": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                }
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                }
+              }
+            ],
+            "main": [
+              {
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "stable-char": "hello",
+        "#name": "test"
+      }
+    ],
+    "test": [
+      "hello2",
+      "hello"
+    ],
+    "html": [
+      {
+        "stable-attr": {
+          "lang": "en"
+        },
+        "stable-child": [
+          {
+            "#name": "head",
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-char": "Test",
+                "#name": "title"
+              }
+            ],
+            "meta": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                }
+              }
+            ],
+            "title": [
+              "Test"
+            ]
+          },
+          {
+            "#name": "body",
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "#name": "main",
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "stable-include": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                }
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                }
+              }
+            ],
+            "main": [
+              {
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "head": [
+          {
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                },
+                "#name": "meta"
+              },
+              {
+                "stable-char": "Test",
+                "#name": "title"
+              }
+            ],
+            "meta": [
+              {
+                "stable-attr": {
+                  "charset": "utf-8"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "viewport",
+                  "content": "width=device-width, initial-scale=1, shrink-to-fit=no"
+                }
+              },
+              {
+                "stable-attr": {
+                  "name": "theme-color",
+                  "content": "#1a1a1a"
+                }
+              }
+            ],
+            "title": [
+              "Test"
+            ]
+          }
+        ],
+        "body": [
+          {
+            "stable-child": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                },
+                "#name": "stable-include"
+              },
+              {
+                "#name": "main",
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "stable-include": [
+              {
+                "stable-attr": {
+                  "html": "one"
+                }
+              },
+              {
+                "stable-attr": {
+                  "html": "two"
+                }
+              }
+            ],
+            "main": [
+              {
+                "stable-child": [
+                  {
+                    "#name": "stable-routes",
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "stable-routes": [
+                  {
+                    "stable-child": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        },
+                        "#name": "stable-route"
+                      },
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "#name": "stable-map",
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        },
+                        "#name": "stable-route"
+                      }
+                    ],
+                    "stable-route": [
+                      {
+                        "stable-attr": {
+                          "path": "/",
+                          "html": "home"
+                        }
+                      },
+                      {
+                        "stable-attr": {
+                          "html": "other"
+                        }
+                      }
+                    ],
+                    "stable-map": [
+                      {
+                        "stable-attr": {
+                          "data": "posts"
+                        },
+                        "stable-child": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            },
+                            "#name": "stable-route"
+                          }
+                        ],
+                        "stable-route": [
+                          {
+                            "stable-attr": {
+                              "path": "/post/{id}",
+                              "html": "post"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
