@@ -1,18 +1,42 @@
 const { hydrate, evaluate, get, map, flatMap, parse } = require('./util');
 const { init, save, load } = require('./store');
 
-const handleTag = (stableTag, pages, parentData) => {
+
+const handleTags = (stableTag, pages, parentData) => {
   const { tag, handler } = stableTag;
   return flatMap(pages, (page) => {
-    const node = page.html(tag).first();
 
-    const dataPath = node[0].attribs['stable-data'];
-    const localData = dataPath ? get(parentData, dataPath) : {};
-    const data = {
-      ...parentData,
-      ...localData,
+    const checkElements = (elements) => {
+      elements.forEach(element => {
+        // type 'element' const? from lib?
+        if (element.type === 'element') {
+          if (element.name === stableTag) {
+            const dataPath = get(element, 'attributes.stable-data')
+            const localData = dataPath ? get(parentData, dataPath) : {};
+            const data = {
+              ...parentData,
+              ...localData,
+            };
+            return handler(page, tag, data); // return?
+          } else {
+            return checkElements(element.elements);
+          }
+        }
+      });
     };
-    return handler(page, tag, data)
+    checkElements(page.elements);
+
+
+
+    // const node = page.html(tag).first();
+
+    // const dataPath = node[0].attribs['stable-data'];
+    // const localData = dataPath ? get(parentData, dataPath) : {};
+    // const data = {
+    //   ...parentData,
+    //   ...localData,
+    // };
+    // return handler(page, tag, data)
   });
 };
 
@@ -158,19 +182,19 @@ const pageHasTag = (pages, stableTag) => {
 
 const render = async (id, data) => {
   const htmlString = await load(id);
-  const html = await parse(htmlString);
+  const elements = parse(htmlString);
 
-  console.log(JSON.stringify(html, null, 2));
+  console.log(JSON.stringify(elements, null, 2));
 
   let pages = [{
     route: id,
-    html,
+    elements,
   }];
 
   for (const stableTag of stableTags) {
-    while (pageHasTag(pages, stableTag)) {
-      pages = await handleTag(stableTag, pages, data);
-    }
+    // while (pageHasTag(pages, stableTag)) {
+      pages = await handleTags(stableTag, pages, data);
+    // }
   }
 
   return pages.map((page) => ({

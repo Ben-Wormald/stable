@@ -93,19 +93,11 @@ const flatten = (arr) => [].concat(...arr);
 
 const flatMap = async (array, f) => Promise.all(flatten(await map(array, f)));
 
-const parse = async (htmlString) => {
+const parse = (htmlString) => {
   const xmlString = `<stable-root>${htmlString}</stable-root>`;
   const jsonString = xml2json(xmlString);
   const root = JSON.parse(jsonString);
-  const elements = root.elements[0].elements;
-  // console.log(JSON.stringify(elements, null, 2));
-  // console.log(parsed);
-
-  const built = json2xml(JSON.stringify(root));
-  console.log(built);
-
-  // const xml = xmlBuilder.buildObject(parsed);
-  // return xml;
+  return root.elements[0].elements;
 };
 
 module.exports = {
